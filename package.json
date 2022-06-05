@@ -34,6 +34,8 @@
     "react-native-swipe-action-list": "^0.0.6",
     "react-native-tab-view": "^3.1.1",
     "react-native-web": "0.17.7",
+    "react-native-webview": "^11.21.1",
+    "react-player": "^2.10.1",
     "webpack-dev-server": "~3.11.0"
   },
   "devDependencies": {
