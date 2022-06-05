@@ -6,6 +6,7 @@ import {ListItem,Icon,Switch,Badge,Avatar} from '@rneui/themed';
 import { Video } from 'expo-av';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import moment from 'moment';
+import {WebView} from 'react-native-webview';
 
 function FreelancerTab({route}) {
     const[data, setData] = useState([]);
@@ -13,6 +14,7 @@ function FreelancerTab({route}) {
     const[Portfolio, setPortfolio] = useState([]);
     const[review, setReview] = useState([]);
     const[booking, setBooking] = useState([]);
+    const BASE_URL = 'https://res.cloudinary.com/dvml1uyhb/image/upload/';
 
     const profiledetails = async() => {
         try {
@@ -120,7 +122,7 @@ function FreelancerTab({route}) {
                                 <Image
                                     style={styles.image}
                                     source={{
-                                        uri: 'https://reactnative.dev/img/tiny_logo.png',
+                                        uri: BASE_URL+l.image,
                                     }}
                                 />
                                 </ListItem.Content>
@@ -140,12 +142,16 @@ function FreelancerTab({route}) {
                             topDivider
                             >
                                 <ListItem.Content>
-                                <Video
+                                    <WebView
+                                    style={{width: 320,height: 200}}
+                                    source={{uri: l.video}}
+                                    />
+                                {/* <Video
                                     style={styles.video}
                                     source={{uri: "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"}}
                                     useNativeControls
                                     resizeMode='contain'
-                                />
+                                /> */}
                                 </ListItem.Content>
                         </ListItem>
                     ))}
