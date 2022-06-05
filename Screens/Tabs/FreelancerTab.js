@@ -146,12 +146,6 @@ function FreelancerTab({route}) {
                                     style={{width: 320,height: 200}}
                                     source={{uri: l.video}}
                                     />
-                                {/* <Video
-                                    style={styles.video}
-                                    source={{uri: "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4"}}
-                                    useNativeControls
-                                    resizeMode='contain'
-                                /> */}
                                 </ListItem.Content>
                         </ListItem>
                     ))}
@@ -219,7 +213,7 @@ function FreelancerTab({route}) {
     return (
         <NavigationContainer independent={true}>
             <SafeAreaView style={{backgroundColor:'#fff',alignItems:'center'}}>
-                <Avatar containerStyle={{marginTop:20}} rounded size={100} source={{uri: "https://picsum.photos/200/300"}}/>
+                <Avatar containerStyle={{marginTop:20}} rounded size={100} source={{uri: BASE_URL+data.profilePicture}}/>
                 <Text style={styles.TextStyle}>
                     {data.firstname} {data.lastname}
                 </Text>

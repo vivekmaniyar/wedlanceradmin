@@ -17,6 +17,7 @@ function FreelancersScreen(props) {
     const[refreshing, setRefreshing] = useState(false);
     const[ModalVisible, setModalVisible] = useState(false);
     const navigation = useNavigation();
+    const BASE_URL = 'https://res.cloudinary.com/dvml1uyhb/image/upload/';
 
     const getFreelancers = async() => {
         try {
@@ -81,7 +82,7 @@ function FreelancersScreen(props) {
                             bottomDivider
                             topDivider
                             >
-                                <Avatar rounded source={{uri: "https://picsum.photos/200/300"}} />
+                                <Avatar rounded source={{uri: BASE_URL+l.profilePicture}} />
                                 <Pressable onPress={() => navigation.navigate('Freelancer details',{username: l.userName})}>
                                     <ListItem.Content>
                                         <ListItem.Title>{l.firstname} {l.lastname}</ListItem.Title>

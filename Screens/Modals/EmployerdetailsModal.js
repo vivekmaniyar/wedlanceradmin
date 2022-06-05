@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 function EmployerdetailsModal(props) {
     const[data, setData] = useState([]);
     const[switchtoggle, setSwitch] = useState(false);
+    const BASE_URL = 'https://res.cloudinary.com/dvml1uyhb/image/upload/';
 
     const profiledetails = async() => {
         try {
@@ -52,7 +53,7 @@ function EmployerdetailsModal(props) {
                         <Icon name='close' type='antdesign' size={30} onPress={props.onClose}/>
             </SafeAreaView>
             <ScrollView style={styles.container} contentContainerStyle={{alignItems:'center',justifyContent:'center'}}>
-                <Avatar rounded size={100} source={{uri: "https://picsum.photos/200/300"}} />
+                <Avatar rounded size={100} source={{uri: BASE_URL+data.profilePicture}} />
                 <Text style={styles.TextStyle}>
                      {data.firstname} {data.lastname}
                 </Text>

@@ -12,6 +12,7 @@ function ProfilesScreen() {
     const[isLoading, setLoading] = useState(true);
     const[refreshing, setRefreshing] = useState(false);
     const[data, setData] = useState([]);
+    const BASE_URL = 'https://res.cloudinary.com/dvml1uyhb/image/upload/';
 
     const profiledetails = async() => {
         try {
@@ -42,7 +43,7 @@ function ProfilesScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Avatar rounded size={100} source={{uri: "https://picsum.photos/200/300"}} />
+            <Avatar rounded size={100} source={{uri: BASE_URL+data.profilePicture}} />
             <Text style={styles.TextStyle}>
                 {data.firstname} {data.lastname}
             </Text>
