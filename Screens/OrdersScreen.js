@@ -2,6 +2,7 @@ import React, {useEffect, useState, useLayoutEffect} from 'react';
 import { RefreshControl, ActivityIndicator, View, StyleSheet, ScrollView, Modal, TextInput, Alert, Pressable} from 'react-native';
 import {ListItem} from "@rneui/themed";
 import { Block, Text, Button, Icon} from 'galio-framework';
+import OrderdetailsModal from './Modals/OrderdetailsModal';
 
 const wait = (timeout) => {
     return new Promise(resolve => { setTimeout(resolve, timeout) });
@@ -42,9 +43,17 @@ function OrdersScreen() {
         setModalVisible(true);
     }
 
+    const DeactivateAddModel = () => {
+        setModalVisible(false);
+    }
 
     return (
         <View>
+            {ModalVisible && <OrderdetailsModal
+                orderId={OrderId}
+                visible={ModalVisible}
+                onClose={DeactivateAddModel}
+            />}
             <ScrollView
                 refreshControl={
                     <RefreshControl
@@ -53,17 +62,17 @@ function OrdersScreen() {
                     />
                 }
             >
-                {isLoading?<ActivityIndicator /> :(
+                {isLoading?<ActivityIndicator size={30} color={"#b04ff9"}/> :(
                     data.map((l) => (
                         <ListItem
                             key={l.orderId}
                             bottomDivider
                             topDivider
                             >
-                            <Pressable onPress={() => console.log(l.freelancerusername)}>
+                            <Pressable onPress={() => ActivateModal(l.orderId)}>
                                 <ListItem.Content>
                                     <ListItem.Title>{l.orderId}</ListItem.Title>
-                                    <ListItem.Subtitle>Amount: {l.amount}</ListItem.Subtitle>
+                                    <ListItem.Subtitle>Amount: ₹{l.amount}</ListItem.Subtitle>
                                 </ListItem.Content>
                             </Pressable>
                         </ListItem>

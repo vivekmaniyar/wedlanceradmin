@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import {SafeAreaView,Modal, TextInput,Button,ActivityIndicator,StyleSheet, View} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Dropdown } from 'react-native-element-dropdown';
+import { Icon, Overlay } from '@rneui/themed';
 
 function AddCityModal(props) {
     const[states, setStates] = useState([]);
@@ -45,13 +46,17 @@ function AddCityModal(props) {
     }
 
     return (
-        <Modal
+        <Overlay
         animationType="slide"
-        transparent={true}
-        visible={props.visible}
+        onBackdropPress={props.onCancel}
+        isVisible={props.visible}
+        fullScreen={true}
+        overlayStyle={{height:"50%",width:"80%",borderRadius:10}}
         >
+            <SafeAreaView style={{flexDirection:'row',justifyContent:'flex-end'}}>
+                        <Icon name='close' type='antdesign' size={30} onPress={props.onCancel}/>
+            </SafeAreaView>
             <SafeAreaView style={styles.SafeAreaViewContainer}>
-                <View style={styles.ViewContainer}>
                     <TextInput
                     style={styles.TextInputContainer}
                     value={CityName}
@@ -72,18 +77,20 @@ function AddCityModal(props) {
                         setStateId(item.stateId);
                     }}
                     />
+                    <SafeAreaView style={{width:'100%',flexDirection:'row',paddingTop:20,justifyContent:'space-evenly'}}>
                     <Button
-                    title="Save"
+                    title="Add City"
+                    color={'#b04ff9'}
                     onPress={addCity}
                     />
                     <Button
                     title="Cancel"
+                    color={'#b04ff9'}
                     onPress={props.onCancel}
                     />
-                    
-                </View>
+                    </SafeAreaView>
             </SafeAreaView>
-        </Modal>
+        </Overlay>
     );
 }
 
@@ -106,7 +113,7 @@ const styles = StyleSheet.create({
         width:200,
         height:40,
         borderColor:'gray',
-        borderWidth:1,
+        borderBottomWidth:1,
         margin:10
     },
     placeholderStyle: {

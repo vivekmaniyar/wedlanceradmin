@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import {SafeAreaView,Modal, TextInput,Button,ActivityIndicator,StyleSheet, View} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Icon, Overlay } from '@rneui/themed';
 
 function AddStateModal(props) {
     const[StateName, setStateName] = useState(null);
@@ -27,30 +28,37 @@ function AddStateModal(props) {
     }
 
     return (
-        <Modal
+        <Overlay
         animationType="slide"
-        transparent={true}
-        visible={props.visible}
+        onBackdropPress={props.onCancel}
+        isVisible={props.visible}
+        fullScreen={true}
+        overlayStyle={{height:"40%",width:"80%",borderRadius:10}}
         >
+            <SafeAreaView style={{flexDirection:'row',justifyContent:'flex-end'}}>
+                <Icon name='close' type='antdesign' size={30} onPress={props.onCancel}/>
+            </SafeAreaView>
             <SafeAreaView style={styles.SafeAreaViewContainer}>
-                <View style={styles.ViewContainer}>
                     <TextInput
                     style={styles.TextInputContainer}
                     value={StateName}
                     placeholder={'State Name'}
                     onChangeText={setStateName}
                     />
-                    <Button
-                    title="Save"
-                    onPress={addState}
-                    />
-                    <Button
-                    title="Cancel"
-                    onPress={props.onCancel}
-                    />
-                </View>
+                    <SafeAreaView style={{width:'100%',flexDirection:'row',paddingTop:20,justifyContent:'space-evenly'}}>
+                        <Button
+                        title="Add State"
+                        color={'#b04ff9'}
+                        onPress={addState}
+                        />
+                        <Button
+                        title="Cancel"
+                        color={'#b04ff9'}
+                        onPress={props.onCancel}
+                        />
+                    </SafeAreaView>
             </SafeAreaView>
-        </Modal>
+        </Overlay>
     );
 }
 
@@ -73,7 +81,7 @@ const styles = StyleSheet.create({
         width:200,
         height:40,
         borderColor:'gray',
-        borderWidth:1,
+        borderBottomWidth:1,
         margin:10
     }
 

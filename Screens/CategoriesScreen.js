@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useLayoutEffect} from 'react';
-import { RefreshControl, ActivityIndicator, View, StyleSheet, ScrollView, Modal, TextInput, Alert} from 'react-native';
+import { RefreshControl, ActivityIndicator, View, StyleSheet, ScrollView, Modal, TextInput, Alert,SafeAreaView} from 'react-native';
 import {ListItem} from "@rneui/themed";
 import { Block, Text, Button, Icon} from 'galio-framework';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -102,18 +102,20 @@ function CategoriesScreen() {
     }
 
     const rightswipe = (categoryId,categoryName) => (
-        <Button icon="pencil" iconFamily="Entypo" iconColor="white" color='dodgerblue' 
-        onPress={() => ActivateModal(categoryId)}>
-            Edit
-        </Button>
+        <SafeAreaView style={{backgroundColor:'dodgerblue',alignSelf:'flex-end',height:'100%',justifyContent:'center'}}>
+            <Button icon="pencil" iconFamily="Entypo" iconColor="white" color='dodgerblue' 
+            onPress={() => ActivateModal(categoryId)}>
+                Edit
+            </Button>
+        </SafeAreaView>
     );
 
     const leftswipe = (categoryId,categoryName) => (
-        <Block bottom>
+        <SafeAreaView style={{alignItems:'flex-end',backgroundColor:'red',alignSelf:'flex-end',height:'100%',justifyContent:'center'}}>
         <Button icon="trash" iconFamily="Entypo" iconColor="white" color='red' onPress={() => DeleteAlert(categoryId)}>
             Delete
         </Button>
-        </Block>
+        </SafeAreaView>
     );
 
 
@@ -132,11 +134,12 @@ function CategoriesScreen() {
                 <ScrollView
                 refreshControl={
                     <RefreshControl
+                    
                     refreshing={refreshing}
                     onRefresh={onRefresh}
                     />
                 }>          
-                        {isLoading?<ActivityIndicator/>:(
+                        {isLoading?<ActivityIndicator size={30} color={"#b04ff9"}/>:(
                             data.map((l) => (
                                 <ListItem.Swipeable key={l.categoryId} bottomDivider topDivider
                                 leftContent={() => rightswipe(l.categoryId,l.categoryName)}

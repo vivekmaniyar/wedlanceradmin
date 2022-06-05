@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import {SafeAreaView,Modal, TextInput,Button,ActivityIndicator,StyleSheet, View} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Dropdown } from 'react-native-element-dropdown';
+import { Icon, Overlay } from '@rneui/themed';
 
 function EditCityModal(props) {
 
@@ -61,13 +62,17 @@ function EditCityModal(props) {
     }
 
     return (
-        <Modal
+        <Overlay
         animationType="slide"
-        transparent={true}
-        visible={props.visible}
+        onBackdropPress={props.onCancel}
+        isVisible={props.visible}
+        fullScreen={true}
+        overlayStyle={{height:"50%",width:"80%",borderRadius:10}}
         >
+            <SafeAreaView style={{flexDirection:'row',justifyContent:'flex-end'}}>
+                <Icon name='close' type='antdesign' size={30} onPress={props.onCancel}/>
+            </SafeAreaView>
             <SafeAreaView style={styles.SafeAreaViewContainer}>
-                <View style={styles.ViewContainer}>
                     <TextInput
                     style={styles.TextInputContainer}
                     value={CityName}
@@ -88,18 +93,20 @@ function EditCityModal(props) {
                         setStateId(item.stateId);
                     }}
                     />
-                    <Button
-                    title="Save"
-                    onPress={updateCity}
-                    />
-                    <Button
-                    title="Cancel"
-                    onPress={props.onCancel}
-                    />
-                    
-                </View>
+                    <SafeAreaView style={{width:'100%',flexDirection:'row',paddingTop:20,justifyContent:'space-evenly'}}>
+                        <Button
+                        title="Update"
+                        color={'#b04ff9'}
+                        onPress={updateCity}
+                        />
+                        <Button
+                        title="Cancel"
+                        color={'#b04ff9'}
+                        onPress={props.onCancel}
+                        />
+                    </SafeAreaView>
             </SafeAreaView>
-        </Modal>
+        </Overlay>
     );
 }
 
@@ -122,7 +129,7 @@ const styles = StyleSheet.create({
         width:200,
         height:40,
         borderColor:'gray',
-        borderWidth:1,
+        borderBottomWidth:1,
         margin:10
     },
     placeholderStyle: {

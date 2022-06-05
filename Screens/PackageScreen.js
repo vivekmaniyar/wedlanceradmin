@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useLayoutEffect} from 'react';
-import { RefreshControl, ActivityIndicator, View, StyleSheet, ScrollView, Modal, TextInput, Alert} from 'react-native';
+import { RefreshControl, ActivityIndicator, View, StyleSheet, ScrollView, Modal, TextInput, Alert,SafeAreaView} from 'react-native';
 import {ListItem} from "@rneui/themed";
-import { Block, Text, Button, Icon} from 'galio-framework';
+import { Block, Text, Icon,Button} from 'galio-framework';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import AddPackageModal from './Modals/AddPackageModal';
@@ -99,18 +99,20 @@ function PackageScreen(props) {
     }
 
     const leftswipe = (packageId) => (
-        <Block bottom>
-        <Button icon="trash" iconFamily="Entypo" iconColor="white" color='red' onPress={() => DeleteAlert(packageId)}>
+        <SafeAreaView style={{alignItems:'flex-end',backgroundColor:'red',alignSelf:'flex-end',height:'100%',justifyContent:'center'}}>
+        <Button style={{borderColor:'red'}} icon="trash" iconFamily="Entypo" iconColor="white" color='red' onPress={() => DeleteAlert(packageId)}>
             Delete
         </Button>
-        </Block>
+        </SafeAreaView>
     );
 
     const rightswipe = (packageId,packageName) => (
-        <Button icon="pencil" iconFamily="Entypo" iconColor="white" color='dodgerblue' 
-        onPress={() => ActivateModal(packageId)}>
-            Edit
-        </Button>
+        <SafeAreaView style={{backgroundColor:'dodgerblue',alignSelf:'flex-end',height:'100%',justifyContent:'center'}}>
+            <Button icon="pencil" iconFamily="Entypo" iconColor="white" color='dodgerblue' 
+            onPress={() => ActivateModal(packageId)}>
+                Edit
+            </Button>
+        </SafeAreaView>
     );
 
     return (
@@ -134,7 +136,7 @@ function PackageScreen(props) {
                     />
                 }
             >
-                {isLoading?<ActivityIndicator/>:(
+                {isLoading?<ActivityIndicator size={30} color={"#b04ff9"}/>:(
                     data.map((l) => (
                         <ListItem.Swipeable
                             key={l.packageId}

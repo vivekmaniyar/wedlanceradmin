@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useLayoutEffect} from 'react';
-import { ActivityIndicator, ScrollView, View, RefreshControl, Alert } from 'react-native';
+import { ActivityIndicator, ScrollView, View, RefreshControl, Alert,SafeAreaView } from 'react-native';
 import {ListItem} from "@rneui/themed";
 import { Block, Text, Button, Icon} from 'galio-framework';
 import EditCityModal from './Modals/EditCityModal';
@@ -99,18 +99,20 @@ function CitiesScreen() {
         onRefresh();
     }
 
-    const rightswipe = (cityId,cityName) => (       
-        <Button icon="pencil" iconFamily="Entypo" iconColor="white" color='dodgerblue' onPress={() => ActivateModal(cityId)}>
-            Edit
-        </Button>
+    const rightswipe = (cityId,cityName) => ( 
+        <SafeAreaView style={{backgroundColor:'dodgerblue',alignSelf:'flex-end',height:'100%',justifyContent:'center'}}>      
+            <Button icon="pencil" iconFamily="Entypo" iconColor="white" color='dodgerblue' onPress={() => ActivateModal(cityId)}>
+                Edit
+            </Button>
+        </SafeAreaView>
     );
 
     const leftswipe = (cityId,cityName) => (
-        <Block bottom>
+        <SafeAreaView style={{alignItems:'flex-end',backgroundColor:'red',alignSelf:'flex-end',height:'100%',justifyContent:'center'}}>
         <Button icon="trash" iconFamily="Entypo" iconColor="white" color='red' onPress={() => DeleteAlert(cityId)}>
             Delete
         </Button>
-        </Block>
+        </SafeAreaView>
     );
 
     return (
@@ -133,7 +135,7 @@ function CitiesScreen() {
                 onRefresh={onRefresh}
                 />
             }>          
-                {isLoading?<ActivityIndicator/>:(
+                {isLoading?<ActivityIndicator size={30} color={"#b04ff9"}/>:(
                     data.map((l) => (
                         <ListItem.Swipeable key={l.cityId} bottomDivider topDivider
                         leftContent={() => rightswipe(l.cityId,l.cityName)}

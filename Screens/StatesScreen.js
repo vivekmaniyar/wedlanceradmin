@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useLayoutEffect} from 'react';
-import { ActivityIndicator, ScrollView, View, RefreshControl, Alert } from 'react-native';
+import { ActivityIndicator, ScrollView, View, RefreshControl, Alert,SafeAreaView } from 'react-native';
 import {ListItem} from "@rneui/themed";
 import { Block, Text, Button, Icon} from 'galio-framework';
 import {useNavigation} from '@react-navigation/native';
@@ -99,19 +99,21 @@ function StatesScreen() {
         onRefresh();
     }
 
-    const rightswipe = (stateId,stateName) => (       
-        <Button icon="pencil" iconFamily="Entypo" iconColor="white" color='dodgerblue'
-        onPress={() => ActivateModal(stateId)}>
-            Edit
-        </Button>
+    const rightswipe = (stateId,stateName) => (   
+        <SafeAreaView style={{backgroundColor:'dodgerblue',alignSelf:'flex-end',height:'100%',justifyContent:'center'}}>
+            <Button icon="pencil" iconFamily="Entypo" iconColor="white" color='dodgerblue'
+            onPress={() => ActivateModal(stateId)}>
+                Edit
+            </Button>
+        </SafeAreaView> 
     );
 
     const leftswipe = (stateId,stateName) => (
-        <Block bottom>
-        <Button icon="trash" iconFamily="Entypo" iconColor="white" color='red' onPress={() => DeleteAlert(stateId)}>
-            Delete
-        </Button>
-        </Block>
+        <SafeAreaView style={{alignItems:'flex-end',backgroundColor:'red',alignSelf:'flex-end',height:'100%',justifyContent:'center'}}>
+            <Button icon="trash" iconFamily="Entypo" iconColor="white" color='red' onPress={() => DeleteAlert(stateId)}>
+                Delete
+            </Button>
+        </SafeAreaView>
     );
 
     return (
@@ -134,7 +136,7 @@ function StatesScreen() {
                     onRefresh={onRefresh}
                     />
             }>          
-                {isLoading?<ActivityIndicator/>:(
+                {isLoading?<ActivityIndicator size={30} color={"#b04ff9"}/>:(
                     data.map((l) => (
                         <ListItem.Swipeable key={l.stateId} bottomDivider topDivider
                         leftContent={() => rightswipe(l.stateId,l.stateName)}
