@@ -47,7 +47,7 @@ function EmployerdetailsModal(props) {
         onBackdropPress={props.onClose}
         isVisible={props.visible}
         fullScreen={true}
-        overlayStyle={{height:"40%",width:"80%",borderRadius:10}}
+        overlayStyle={{height:"50%",width:"80%",borderRadius:10}}
         >
             <SafeAreaView style={{flexDirection:'row',justifyContent:'flex-end'}}>
                         <Icon name='close' type='antdesign' size={30} onPress={props.onClose}/>
