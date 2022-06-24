@@ -82,7 +82,7 @@ function FreelancersScreen(props) {
                             bottomDivider
                             topDivider
                             >
-                                <Avatar rounded source={{uri: BASE_URL+l.profilePicture}} />
+                                <Avatar rounded source={{uri: l.profilePicture}} />
                                 <Pressable onPress={() => navigation.navigate('Freelancer details',{username: l.userName})}>
                                     <ListItem.Content>
                                         <ListItem.Title>{l.firstname} {l.lastname}</ListItem.Title>

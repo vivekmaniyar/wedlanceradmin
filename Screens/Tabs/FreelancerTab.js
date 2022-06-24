@@ -14,7 +14,7 @@ function FreelancerTab({route}) {
     const[Portfolio, setPortfolio] = useState([]);
     const[review, setReview] = useState([]);
     const[booking, setBooking] = useState([]);
-    const BASE_URL = 'https://res.cloudinary.com/dvml1uyhb/image/upload/';
+    //const BASE_URL = 'https://res.cloudinary.com/dvml1uyhb/image/upload/';
 
     const profiledetails = async() => {
         try {
@@ -122,7 +122,7 @@ function FreelancerTab({route}) {
                                 <Image
                                     style={styles.image}
                                     source={{
-                                        uri: BASE_URL+l.image,
+                                        uri: l.image,
                                     }}
                                 />
                                 </ListItem.Content>
@@ -213,7 +213,7 @@ function FreelancerTab({route}) {
     return (
         <NavigationContainer independent={true}>
             <SafeAreaView style={{backgroundColor:'#fff',alignItems:'center'}}>
-                <Avatar containerStyle={{marginTop:20}} rounded size={100} source={{uri: BASE_URL+data.profilePicture}}/>
+                <Avatar containerStyle={{marginTop:20}} rounded size={100} source={{uri: data.profilePicture}}/>
                 <Text style={styles.TextStyle}>
                     {data.firstname} {data.lastname}
                 </Text>
